@@ -11,6 +11,14 @@ Puppet::Type.newtype(:mac_ftp_proxy) do
     desc "Proxy Server setting for the interface"
   end
 
+  newparam(:authenticated_username) do
+    desc "Username for proxy authentication"
+  end
+
+  newparam(:authenticated_password) do
+    desc "Password for proxy authentication"
+  end
+
   newparam(:proxy_authenticated) do
     desc "Proxy Server setting for the interface"
     newvalues(:true, :false)
@@ -18,6 +26,7 @@ Puppet::Type.newtype(:mac_ftp_proxy) do
 
   newproperty(:proxy_port) do
     desc "Proxy Server setting for the interface"
+    newvalues(/^\d+$/)
   end
-
 end
+
