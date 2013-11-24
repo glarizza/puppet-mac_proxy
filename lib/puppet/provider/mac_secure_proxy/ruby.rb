@@ -7,7 +7,7 @@ Puppet::Type.type(:mac_secure_proxy).provide(:ruby, :parent => Puppet::Provider:
   mk_resource_methods
 
   def self.get_proxy_type
-    :web
+    :secure
   end
 
   def get_proxy_type

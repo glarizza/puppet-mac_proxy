@@ -7,7 +7,7 @@ Puppet::Type.type(:mac_streaming_proxy).provide(:ruby, :parent => Puppet::Provid
   mk_resource_methods
 
   def self.get_proxy_type
-    :web
+    :streaming
   end
 
   def get_proxy_type

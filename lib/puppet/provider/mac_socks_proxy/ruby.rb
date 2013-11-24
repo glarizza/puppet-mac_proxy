@@ -7,7 +7,7 @@ Puppet::Type.type(:mac_socks_proxy).provide(:ruby, :parent => Puppet::Provider::
   mk_resource_methods
 
   def self.get_proxy_type
-    :web
+    :socks
   end
 
   def get_proxy_type
