@@ -162,7 +162,7 @@ class Puppet::Provider::MacProxy < Puppet::Provider
       end
     else
       if resource[:proxy_server].nil?
-        fail("Proxy types of 'auto' require a proxy_server setting")
+        raise Puppet::Error, "Proxy types of 'auto' require a proxy_server setting"
       end
       networksetup(
         [
