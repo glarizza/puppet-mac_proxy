@@ -25,7 +25,7 @@ Puppet::Type.newtype(:mac_web_proxy) do
     desc "Password for proxy authentication"
   end
 
-  newparam(:proxy_authenticated) do
+  newproperty(:proxy_authenticated) do
     desc "Proxy Server setting for the interface"
     newvalues(:true, :false)
   end
