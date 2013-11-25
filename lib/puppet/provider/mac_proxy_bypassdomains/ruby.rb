@@ -1,10 +1,10 @@
 require 'puppet/provider/mac_proxy'
 
-Puppet::Type.type(:mac_proxy_bypassdomains).provide(:ruby, :parent => Puppet::Provider::MacProxy) do
+Puppet::Type.type(:mac_proxy_bypassdomains).provide(:ruby) do
   commands :networksetup => 'networksetup'
 
   def self.instances
-    interfaces = get_list_of_interfaces
+    interfaces = Puppet::Provider::MacProxy.get_list_of_interfaces
     array_of_interfaces = interfaces.collect do |int|
       new({
         :name    => int,
