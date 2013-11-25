@@ -5,6 +5,12 @@ Puppet::Type.newtype(:mac_socks_proxy) do
 
   newparam(:name, :namevar => true) do
     desc "Interface name - currently must be 'friendly' name (e.g. Ethernet)"
+    munge do |val|
+      val.downcase
+    end
+    def insync?(is)
+      is.downcase == should.downcase
+    end
   end
 
   newproperty(:proxy_server) do
