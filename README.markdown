@@ -36,7 +36,7 @@ The web, ftp, gopher, secure, and socks proxy types are all declared similarly a
     mac_web_proxy { 'Ethernet':
       ensure       => present,
       proxy_server => 'proxy.puppetlabs.com',
-      proxy_url    => '8080'
+      proxy_port   => '8080'
     }
 
 The auto proxy only accepts a `proxy_server` property, and does not accept a `proxy_port` property:
