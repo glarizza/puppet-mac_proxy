@@ -1,7 +1,7 @@
-require 'puppet/provider/mac_proxy'
+require_relative '../mac_proxy'
 
-Puppet::Type.type(:mac_secure_proxy).provide(:ruby, :parent => Puppet::Provider::MacProxy) do
-  commands :networksetup => 'networksetup'
+Puppet::Type.type(:mac_secure_proxy).provide(:ruby, parent: Puppet::Provider::MacProxy) do
+  commands networksetup: 'networksetup'
 
   # Automagically create getter/setter methods for prefetching/flushing
   mk_resource_methods

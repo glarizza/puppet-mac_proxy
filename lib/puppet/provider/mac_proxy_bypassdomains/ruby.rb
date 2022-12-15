@@ -1,15 +1,15 @@
-require 'puppet/provider/mac_proxy'
+require_relative '../mac_proxy'
 
 Puppet::Type.type(:mac_proxy_bypassdomains).provide(:ruby) do
-  commands :networksetup => 'networksetup'
+  commands networksetup: 'networksetup'
 
   def self.instances
     interfaces = Puppet::Provider::MacProxy.get_list_of_interfaces
-    array_of_interfaces = interfaces.collect do |int|
+    array_of_interfaces = interfaces.map do |int|
       new({
-        :name    => int,
-        :domains => get_proxy_bypass_domains(int),
-      })
+            name: int,
+        domains: get_proxy_bypass_domains(int),
+          })
     end
     array_of_interfaces
   end
@@ -22,7 +22,7 @@ Puppet::Type.type(:mac_proxy_bypassdomains).provide(:ruby) do
       return nil
     end
     domains = output.split("\n").sort
-    return nil if domains.first =~ /There aren\'t any bypass domains set/
+    return nil if %r{There aren\'t any bypass domains set}.match?(domains.first)
     domains
   end
 
@@ -35,7 +35,6 @@ Puppet::Type.type(:mac_proxy_bypassdomains).provide(:ruby) do
   end
 
   def create
-    Puppet.debug "YOU ARE IN CREATE!"
     networksetup(['-setproxybypassdomains', resource[:name], resource[:domains]])
   end
 
@@ -47,4 +46,3 @@ Puppet::Type.type(:mac_proxy_bypassdomains).provide(:ruby) do
     networksetup(['-setproxybypassdomains', resource[:name], value])
   end
 end
-
