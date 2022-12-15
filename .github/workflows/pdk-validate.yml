@@ -1,0 +1,42 @@
+# This workflow executes the 'pdk validate' command against any code changes
+# submitted to this module for the purpose of ensuring that changes with
+# validation errors don't get committed to the repo.
+name: pdk-validate
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    # The branches below must be a subset of the branches above
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+
+jobs:
+  pdk-validate:
+    name: Run PDK validation check
+    runs-on: ubuntu-latest
+    env:
+      PATH: /opt/puppetlabs/pdk/bin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install the PDK
+        run: |
+          wget https://apt.puppet.com/puppet-tools-release-bionic.deb
+          sudo dpkg -i puppet-tools-release-bionic.deb
+          sudo apt-get update
+          sudo apt-get install pdk
+
+      - name: PDK Validation - Version 6
+        run: |
+          cd $GITHUB_WORKSPACE
+          pdk validate --puppet-version=6
+
+      - name: PDK Validation - Version 7
+        run: |
+          cd $GITHUB_WORKSPACE
+          pdk validate --puppet-version=7
