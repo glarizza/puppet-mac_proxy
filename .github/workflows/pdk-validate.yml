@@ -40,3 +40,13 @@ jobs:
         run: |
           cd $GITHUB_WORKSPACE
           pdk validate --puppet-version=7
+
+      - name: PDK Unit Testing - Version 6
+        run: |
+          cd $GITHUB_WORKSPACE
+          pdk test unit --puppet-version=6
+
+      - name: PDK Unit Testing - Version 7
+        run: |
+          cd $GITHUB_WORKSPACE
+          pdk test unit --puppet-version=7
