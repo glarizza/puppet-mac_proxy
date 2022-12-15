@@ -13,9 +13,8 @@ on:
 permissions:
   contents: read
 
-
 jobs:
-  pdk-valiation:
+  pdk-validation:
     name: Run PDK validation checks on supported Puppet versions
     strategy:
       matrix:
