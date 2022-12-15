@@ -1,7 +1,7 @@
-# This workflow executes the 'pdk validate' command against any code changes
-# submitted to this module for the purpose of ensuring that changes with
-# validation errors don't get committed to the repo.
-name: pdk-validate
+# This workflow executes PDK syntax validation, linting, and unit testing
+# against any code changes submitted to this module for the purpose of ensuring
+# that changes with validation errors don't get committed to the repo.
+name: pdk-actions
 
 on:
   push:
@@ -14,8 +14,8 @@ permissions:
   contents: read
 
 jobs:
-  pdk-validation:
-    name: Run PDK validation checks on supported Puppet versions
+  validation:
+    name: PDK validation checks
     strategy:
       matrix:
         version: [6, 7]
@@ -33,8 +33,8 @@ jobs:
           cd $GITHUB_WORKSPACE
           pdk validate --puppet-version=${{ matrix. version }}
 
-  pdk-unit-testing:
-    name: Run PDK unit testing on supported Puppet versions
+  unit-testing:
+    name: PDK unit testing
     strategy:
       matrix:
         version: [6, 7]
